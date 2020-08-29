@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chrome notifications - App</title>
+</head>
+<body>
+	<h1>Notifications</h1>
+	<button onclick="myNotification()">Learn more</button>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			if (!Notification) {
+				alert('Desktop notifications not available in your browser. Try Chrome.')
+				return
+			}
+
+			if (Notification.permission !== 'granted')
+				Notification.requestPermission()
+		})
+
+		const myNotification = () => {
+			if (Notification.permission !== 'granted') {
+				Notification.requestPermission()
+			} else {
+				var notification = new Notification('Welcome to Cyberg', {
+					icon: './icon.png',
+					body: 'Innovating is the code! by nickcarva.'
+				})
+
+				notification.onclick = () => {
+					window.open('https://cyberg.tech')
+				}
+			}
+		}
+	</script>
+</body>
+</html>
